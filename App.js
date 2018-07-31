@@ -1,10 +1,29 @@
 import React, {Component} from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
+import {Alert, AppRegistry, FlatList, StyleSheet, Text, View, Button} from 'react-native';
 
 export default class App extends Component {
+
+    _console() {
+        console.log('hello');
+    }
+
+    _onPressButton() {
+        Alert.alert('You tapped the button!')
+        console.log('hello');
+    }
+
+    componentWillMount() {
+        this._console;
+    }
+
     render() {
+        console.log(`[INFO] this.state.activeTab:`);
         return (
             <View style={styles.container}>
+                <Button
+                    onPress={this._onPressButton}
+                    title="Press Me"
+                />
                 <FlatList
                     data={[
                         {key: 'Devin'},
@@ -16,7 +35,10 @@ export default class App extends Component {
                         {key: 'Jimmy'},
                         {key: 'Julie'},
                     ]}
-                    renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+                    renderItem={({item}) =>
+                        <Text style={styles.item}
+                              onPress={() => Alert.alert(item.key)}
+                        >{item.key}</Text>}
                 />
             </View>
         );
