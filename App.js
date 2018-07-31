@@ -31,14 +31,25 @@ export default class App extends Component {
                         {key: 'James'},
                         {key: 'Joel'},
                         {key: 'John'},
-                        {key: 'Jillian'},
-                        {key: 'Jimmy'},
-                        {key: 'Julie'},
+                        {key: 'df'},
+                        {key: 'Jun'},
+                        {key: 'Heck'},
+                        {key: 'Rin'},
+                        {key: 'Rain'},
+                        {key: 'Sara'},
+                        {key: 'Shin'},
+                        {key: 'Toma'},
+                        {key: 'Cat'},
+                        {key: 'Dr'},
+
                     ]}
                     renderItem={({item}) =>
-                        <Text style={styles.item}
-                              onPress={() => Alert.alert(item.key)}
-                        >{item.key}</Text>}
+                        <View>
+                            <Text style={styles.item}
+                                  onPress={() => Alert.alert(item.key)}
+                            >{item.key}</Text>
+                        </View>
+                    }
                 />
             </View>
         );
@@ -54,5 +65,8 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 18,
         height: 44,
+        borderStyle: 'solid',
+        borderWidth: 0.5,
+        borderColor: '#888888',
     },
 })
