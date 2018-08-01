@@ -53,4 +53,4 @@ Navigation.startTabBasedApp({
     tabs: createTabs()
 });
 
-AppRegistry.registerComponent(appName, () => App);
+//AppRegistry.registerComponent(appName, () => App);

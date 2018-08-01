@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     StyleSheet,
     Alert,
+    FlatList,
     Platform
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
@@ -57,13 +58,29 @@ export default class ArticleListScreen extends Component {
 
     render() {
         return (
-            <View style={{flex: 1, padding: 20}}>
-                <TouchableOpacity onPress={this.onPushPress.bind(this)}>
-                    <Text style={styles.button}>Push Plain Screen</Text>
-                </TouchableOpacity>
+            <View style={styles.container}>
+                <FlatList
+                    data={[
+                        {key: 'Search Ads is Expanding to More Countries'},
+                        {key: 'New Design Resources Now Available'},
+                        {key: 'WWDC18 Video Transcripts Now Available'},
+                        {key: 'データインテグレーション部にジョインしました大高です。'},
+                        {key: 'Amazon EFSマウントを簡単にするamazon-efs-utilsをインストールする'},
+                        {key: 'Firebase ML Kitで自作のカスタムモデルを使って料理・非料理画像を判定できるようにした'},
+                        {key: 'はてな・ペパボ技術大会 #4 〜DevOps〜 @京都 を開催しました #pepabohatena'},
+                        {key: 'fastlane match でiOSアプリ開発者を「証明書管理の苦しみ」から解放せよ！'},
+                        {key: 'Char2Vec で文字の特性について調べてみた'},
+                        {key: '新卒研修の受講レポート～AWS編～'},
+                        {key: 're:Invent 2017: Tuesday Night Live の裏番組で'},
+                        {key: '新卒研修の受講レポート～git編～'},
+                        {key: 'Why Stanby moved big data analysis from Amazon Web Services to Google Cloud Platform'},
+                    ]}
+                    renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+                />
             </View>
         );
     }
+
 
     onPushPress() {
         this.props.navigator.push({
@@ -120,5 +137,16 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         color: 'blue'
-    }
+    },
+    container: {
+        flex: 1,
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        //height: 44,
+        borderStyle: 'solid',
+        borderWidth: 0.5,
+        borderColor: '#bbb',
+    },
 });
