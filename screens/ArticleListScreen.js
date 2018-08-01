@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
-export default class FirstTabScreen extends Component {
+export default class ArticleListScreen extends Component {
+    /*
     static navigatorButtons = {
         leftButtons: [{
             id: 'menu'
@@ -24,7 +25,8 @@ export default class FirstTabScreen extends Component {
             }
         ]
     };
-    static navigatorStyle = {
+    */
+    static navigatorStyle: {
         navBarBackgroundColor: '#3b5998',
         navBarTextColor: '#fff',
         navBarSubtitleTextColor: '#ff0000',
