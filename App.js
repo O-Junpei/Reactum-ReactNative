@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, AppRegistry, FlatList, StyleSheet, Text, View, Button} from 'react-native';
+import { Navigation } from 'react-native-navigation';
 
 export default class App extends Component {
 
@@ -33,7 +34,7 @@ export default class App extends Component {
                         {key: 'John'},
                         {key: 'df'},
                         {key: 'Jun'},
-                        {key: 'Heck'},
+                        {key: 'Hesdfsck'},
                         {key: 'Rin'},
                         {key: 'Rain'},
                         {key: 'Sara'},
@@ -70,3 +71,19 @@ const styles = StyleSheet.create({
         borderColor: '#888888',
     },
 })
+
+
+function registerScreens() {
+    Navigation.registerComponent('example.WelcomeTabScreen', () => App);
+}
+registerScreens();
+
+Navigation.startTabBasedApp({
+    tabs: [
+        {
+            label: 'Welcome',
+            screen: 'example.WelcomeTabScreen',
+            title: 'Welcome'
+        },
+    ]
+});
