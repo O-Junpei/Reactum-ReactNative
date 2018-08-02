@@ -9,6 +9,8 @@ import {
     Platform
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
+import { SearchBar } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 
 export default class ArticleListScreen extends Component {
 
@@ -21,7 +23,6 @@ export default class ArticleListScreen extends Component {
         ]
     };
 
-
     _onPressButton() {
         Alert.alert('You tapped the button!')
         console.log('hello');
@@ -29,7 +30,7 @@ export default class ArticleListScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {data: null};
+        this.state = {data: null, searchedData: null};
         // if you want to listen on navigator events, set this up
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
@@ -49,6 +50,7 @@ export default class ArticleListScreen extends Component {
                     responseJson[i]['key'] = responseJson[i].id
                 }
                 this.setState({data: responseJson});
+                this.setState({searchedData: responseJson})
             })
             .catch((error) => {
                 console.error(error);
@@ -65,17 +67,52 @@ export default class ArticleListScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <SearchBar
+                    platform={"ios"}
+                    clearIcon={<Icon name='rowing' />}
+                    lightTheme={true}
+                    onChangeText={(text) =>
+                        this._onChangeText(text)
+                    }
+
+                    onClear={() =>
+                        Alert.alert('Clear', 'うごかねぇ')
+                    }
+                    placeholder={'Search'} />
                 <FlatList
-                    data={this.state.data}
+                    data={this.state.searchedData}
+                    execData={this.state.searchedData}
                     renderItem={({item}) => <Text
                         style={styles.item}
                         onPress={() =>
                             this.onPushPress(item.url)
-                        }
+                        }c
                     >{item.title}</Text>}
                 />
             </View>
         );
+    }
+
+    //TextFieldの値が変更されたら呼ばれる
+    _onChangeText(text) {
+
+        let data = this.state.data
+        let searchedData = []
+        for (let i = 0; i < data.length; i++) {
+            let title = data[i].title
+            if (title.includes(text)) {
+                console.log('------')
+                console.log(title)
+                console.log(text)
+                searchedData.push(data[i])
+            }
+        }
+
+        console.log('searchedData')
+        this.state.searchedData = searchedData
+        console.log('更新後')
+        console.log(this.state.searchedData)
+
     }
 
     onPushPress(url) {
