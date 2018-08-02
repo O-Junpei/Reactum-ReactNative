@@ -37,9 +37,32 @@ export default class ArticleListScreen extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {data: null};
         // if you want to listen on navigator events, set this up
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
+
+    componentWillMount() {
+        console.log('componentWillMount');
+        this._fetch()
+    }
+
+    _fetch = () => {
+        fetch('http://54.168.54.196/api/v0/new')
+            .then((response) => response.json())
+            .then((responseJson) => {
+
+                for(let i = 0; i < responseJson.length; i++) { // iが0から9までの間の繰り返し（毎囘最後に i++ を実行）
+                    console.log(responseJson[i].title)
+                    responseJson[i]['key'] = responseJson[i].id
+                }
+                this.setState({data: responseJson});
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
 
     onNavigatorEvent(event) {
         if (event.id === 'search') {
@@ -51,6 +74,31 @@ export default class ArticleListScreen extends Component {
         return (
             <View style={styles.container}>
                 <FlatList
+                    data={this.state.data}
+                    /*extraData={this.state.data}
+                    keyExtractor={this._keyExtractor}*/
+
+
+                    renderItem={({item}) => <Text
+                        style={styles.item}
+                        onPress={this.onPushPress.bind(this)}
+                    >{item.title}</Text>}
+
+
+                    /*
+                    renderItem={({item}) =>
+                        <View style={styles.movieView}>
+                            <Text
+                                style={styles.movieText}
+                                onPress={() => Alert.alert(item.title)}
+                            >
+                                {item.releaseYear}{'\n\t'}{item.title}
+                            </Text>
+                        </View>
+                    }
+                    */
+
+                    /*
                     data={[
                         {key: 'Search Ads is Expanding to More Countries'},
                         {key: 'New Design Resources Now Available'},
@@ -70,6 +118,8 @@ export default class ArticleListScreen extends Component {
                         style={styles.item}
                         onPress={this.onPushPress.bind(this)}
                     >{item.key}</Text>}
+                    */
+
                 />
             </View>
         );
