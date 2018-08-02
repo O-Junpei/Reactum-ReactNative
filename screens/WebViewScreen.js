@@ -13,13 +13,19 @@ export default class WebViewScreen extends Component {
         drawUnderTabBar: true
     };
     constructor(props) {
+        console.log('--------------------')
         super(props);
+        console.log(props)
+    }
+
+    componentWillMount() {
+        console.log('adadad')
     }
 
     render() {
         return (
             <WebView
-                source={{uri: 'https://github.com/facebook/react-native'}}
+                source={{uri: this.props.url}}
                 style={{marginTop: 0}}
             />
         );

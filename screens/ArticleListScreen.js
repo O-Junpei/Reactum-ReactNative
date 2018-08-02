@@ -34,7 +34,6 @@ export default class ArticleListScreen extends Component {
         console.log('hello');
     }
 
-
     constructor(props) {
         super(props);
         this.state = {data: null};
@@ -52,8 +51,8 @@ export default class ArticleListScreen extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
 
-                for(let i = 0; i < responseJson.length; i++) { // iが0から9までの間の繰り返し（毎囘最後に i++ を実行）
-                    console.log(responseJson[i].title)
+                // keyが無いと怒られるので付与
+                for (let i = 0; i < responseJson.length; i++) {
                     responseJson[i]['key'] = responseJson[i].id
                 }
                 this.setState({data: responseJson});
@@ -75,60 +74,22 @@ export default class ArticleListScreen extends Component {
             <View style={styles.container}>
                 <FlatList
                     data={this.state.data}
-                    /*extraData={this.state.data}
-                    keyExtractor={this._keyExtractor}*/
-
-
                     renderItem={({item}) => <Text
                         style={styles.item}
-                        onPress={this.onPushPress.bind(this)}
+                        onPress={() =>
+                            this.onPushPress(item.url)
+                        }
                     >{item.title}</Text>}
-
-
-                    /*
-                    renderItem={({item}) =>
-                        <View style={styles.movieView}>
-                            <Text
-                                style={styles.movieText}
-                                onPress={() => Alert.alert(item.title)}
-                            >
-                                {item.releaseYear}{'\n\t'}{item.title}
-                            </Text>
-                        </View>
-                    }
-                    */
-
-                    /*
-                    data={[
-                        {key: 'Search Ads is Expanding to More Countries'},
-                        {key: 'New Design Resources Now Available'},
-                        {key: 'WWDC18 Video Transcripts Now Available'},
-                        {key: 'データインテグレーション部にジョインしました大高です。'},
-                        {key: 'Amazon EFSマウントを簡単にするamazon-efs-utilsをインストールする'},
-                        {key: 'Firebase ML Kitで自作のカスタムモデルを使って料理・非料理画像を判定できるようにした'},
-                        {key: 'はてな・ペパボ技術大会 #4 〜DevOps〜 @京都 を開催しました #pepabohatena'},
-                        {key: 'fastlane match でiOSアプリ開発者を「証明書管理の苦しみ」から解放せよ！'},
-                        {key: 'Char2Vec で文字の特性について調べてみた'},
-                        {key: '新卒研修の受講レポート～AWS編～'},
-                        {key: 're:Invent 2017: Tuesday Night Live の裏番組で'},
-                        {key: '新卒研修の受講レポート～git編～'},
-                        {key: 'Why Stanby moved big data analysis from Amazon Web Services to Google Cloud Platform'},
-                    ]}
-                    renderItem={({item}) => <Text
-                        style={styles.item}
-                        onPress={this.onPushPress.bind(this)}
-                    >{item.key}</Text>}
-                    */
-
                 />
             </View>
         );
     }
 
-    onPushPress() {
+    onPushPress(url) {
         this.props.navigator.push({
             title: "WebView",
-            screen: "com.swiswiswift.WebView"
+            screen: "com.swiswiswift.WebView",
+            passProps: {url: url},
         });
     }
 
@@ -142,7 +103,8 @@ export default class ArticleListScreen extends Component {
     onModalPress() {
         this.props.navigator.showModal({
             title: "Modal",
-            screen: "example.ModalScreen"
+            screen: "example.ModalScreen",
+            test: 'hellohello'
         });
     }
 
