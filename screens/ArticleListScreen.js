@@ -11,22 +11,16 @@ import {
 import {Navigation} from 'react-native-navigation';
 
 export default class ArticleListScreen extends Component {
-    /*
+
     static navigatorButtons = {
-        leftButtons: [{
-            id: 'menu'
-        }],
         rightButtons: [
             {
-                title: 'Edit',
-                id: 'edit'
-            },
-            {
-                id: 'add'
+                title: 'Search',
+                id: 'search'
             }
         ]
     };
-    */
+
     static navigatorStyle: {
         navBarBackgroundColor: '#3b5998',
         navBarTextColor: '#fff',
@@ -35,6 +29,12 @@ export default class ArticleListScreen extends Component {
         statusBarTextColorScheme: 'light'
     };
 
+    _onPressButton() {
+        Alert.alert('You tapped the button!')
+        console.log('hello');
+    }
+
+
     constructor(props) {
         super(props);
         // if you want to listen on navigator events, set this up
@@ -42,17 +42,8 @@ export default class ArticleListScreen extends Component {
     }
 
     onNavigatorEvent(event) {
-        if (event.id === 'menu') {
-            this.props.navigator.toggleDrawer({
-                side: 'left',
-                animated: true
-            });
-        }
-        if (event.id === 'edit') {
-            Alert.alert('NavBar', 'Edit button pressed');
-        }
-        if (event.id === 'add') {
-            Alert.alert('NavBar', 'Add button pressed');
+        if (event.id === 'search') {
+            Alert.alert('NavBar', 'Search button pressed');
         }
     }
 
@@ -75,17 +66,19 @@ export default class ArticleListScreen extends Component {
                         {key: '新卒研修の受講レポート～git編～'},
                         {key: 'Why Stanby moved big data analysis from Amazon Web Services to Google Cloud Platform'},
                     ]}
-                    renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+                    renderItem={({item}) => <Text
+                        style={styles.item}
+                        onPress={this.onPushPress.bind(this)}
+                    >{item.key}</Text>}
                 />
             </View>
         );
     }
 
-
     onPushPress() {
         this.props.navigator.push({
-            title: "More",
-            screen: "example.PushedScreen"
+            title: "WebView",
+            screen: "com.swiswiswift.WebView"
         });
     }
 

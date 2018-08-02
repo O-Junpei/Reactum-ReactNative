@@ -5,6 +5,8 @@ import FirstTabScreen from './FirstTabScreen';
 import SecondTabScreen from './SecondTabScreen';
 import ThirdTabScreen from './ThirdTabScreen';
 import PushedScreen from './PushedScreen';
+import WebViewScreen from './WebViewScreen';
+
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
@@ -13,4 +15,5 @@ export function registerScreens() {
     Navigation.registerComponent('example.SecondTabScreen', () => SecondTabScreen);
     Navigation.registerComponent('example.ThirdTabScreen', () => ThirdTabScreen);
     Navigation.registerComponent('example.PushedScreen', () => PushedScreen);
+    Navigation.registerComponent('com.swiswiswift.WebView', () => WebViewScreen);
 }
