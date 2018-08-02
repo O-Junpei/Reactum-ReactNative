@@ -21,13 +21,6 @@ export default class ArticleListScreen extends Component {
         ]
     };
 
-    static navigatorStyle: {
-        navBarBackgroundColor: '#3b5998',
-        navBarTextColor: '#fff',
-        navBarSubtitleTextColor: '#ff0000',
-        navBarButtonColor: '#ffffff',
-        statusBarTextColorScheme: 'light'
-    };
 
     _onPressButton() {
         Alert.alert('You tapped the button!')
@@ -136,20 +129,12 @@ export default class ArticleListScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    button: {
-        textAlign: 'center',
-        fontSize: 18,
-        marginBottom: 10,
-        marginTop: 10,
-        color: 'blue'
-    },
     container: {
         flex: 1,
     },
     item: {
         padding: 10,
         fontSize: 18,
-        //height: 44,
         borderStyle: 'solid',
         borderWidth: 0.5,
         borderColor: '#bbb',
