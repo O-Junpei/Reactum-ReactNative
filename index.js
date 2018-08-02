@@ -13,7 +13,7 @@ Navigation.startTabBasedApp({
         {
             label: 'Article',
             screen: 'example.ArticleListScreen',
-            title: 'Article',
+            title: 'Articles',
             icon: require('./image/tab/tab-list.png'),
             iconInsets: { // add this to change icon position (optional, iOS only).
                 top: 0, // optional, default is 0.
@@ -36,8 +36,8 @@ Navigation.startTabBasedApp({
         }
     ],
     tabsStyle: { // optional, add this if you want to style the tab bar beyond the defaults
-        tabBarButtonColor: '#999999', // optional, change the color of the tab icons and text (also unselected). On Android, add this to appStyle
-        tabBarSelectedButtonColor: '#222222', // optional, change the color of the selected tab icon and text (only selected). On Android, add this to appStyle
+        tabBarButtonColor: '#7777777', // optional, change the color of the tab icons and text (also unselected). On Android, add this to appStyle
+        tabBarSelectedButtonColor: '#000000', // optional, change the color of the selected tab icon and text (only selected). On Android, add this to appStyle
         tabBarBackgroundColor: '#ffffff', // optional, change the background color of the tab bar
         initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
     },
