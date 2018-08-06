@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Alert,
     FlatList,
+    ScrollView,
     Platform
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
@@ -19,7 +20,7 @@ export default class ArticleListScreen extends Component {
             {
                 title: 'Search',
                 id: 'search'
-            }
+            },
         ]
     };
 
@@ -32,7 +33,7 @@ export default class ArticleListScreen extends Component {
         super(props);
         this.state = {data: null, searchedData: null};
         // if you want to listen on navigator events, set this up
-        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+        this.props.navigator.setOnNavigatorEvent(ArticleListScreen.onNavigatorEvent.bind(this));
     }
 
     componentWillMount() {
@@ -58,15 +59,15 @@ export default class ArticleListScreen extends Component {
     }
 
 
-    onNavigatorEvent(event) {
+    static onNavigatorEvent(event) {
         if (event.id === 'search') {
-            Alert.alert('NavBar', 'Search button pressed');
+            //Alert.alert('NavBar', 'Search button pressed');
         }
     }
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <SearchBar
                     platform={"ios"}
                     clearIcon={<Icon name='rowing' />}
@@ -80,39 +81,32 @@ export default class ArticleListScreen extends Component {
                     }
                     placeholder={'Search'} />
                 <FlatList
+
                     data={this.state.searchedData}
-                    execData={this.state.searchedData}
+                    extraData={this.state}
+                    removeClippedSubviews={false}
                     renderItem={({item}) => <Text
                         style={styles.item}
                         onPress={() =>
                             this.onPushPress(item.url)
-                        }c
+                        }
                     >{item.title}</Text>}
                 />
-            </View>
+            </ScrollView>
         );
     }
 
     //TextFieldの値が変更されたら呼ばれる
     _onChangeText(text) {
-
         let data = this.state.data
         let searchedData = []
         for (let i = 0; i < data.length; i++) {
             let title = data[i].title
             if (title.includes(text)) {
-                console.log('------')
-                console.log(title)
-                console.log(text)
                 searchedData.push(data[i])
             }
         }
-
-        console.log('searchedData')
-        this.state.searchedData = searchedData
-        console.log('更新後')
-        console.log(this.state.searchedData)
-
+        this.setState({searchedData: searchedData});
     }
 
     onPushPress(url) {
@@ -120,47 +114,6 @@ export default class ArticleListScreen extends Component {
             title: "WebView",
             screen: "com.swiswiswift.WebView",
             passProps: {url: url},
-        });
-    }
-
-    onPushStyledPress() {
-        this.props.navigator.push({
-            title: "Styled",
-            screen: "example.StyledScreen"
-        });
-    }
-
-    onModalPress() {
-        this.props.navigator.showModal({
-            title: "Modal",
-            screen: "example.ModalScreen",
-            test: 'hellohello'
-        });
-    }
-
-    onLightBoxPress() {
-        this.props.navigator.showLightBox({
-            screen: "example.LightBoxScreen",
-            style: {
-                backgroundBlur: "dark"
-            },
-            passProps: {
-                greeting: 'hey there'
-            },
-        });
-    }
-
-    onInAppNotificationPress() {
-        this.props.navigator.showInAppNotification({
-            screen: "example.NotificationScreen"
-        });
-    }
-
-    onStartSingleScreenApp() {
-        Navigation.startSingleScreenApp({
-            screen: {
-                screen: 'example.FirstTabScreen'
-            }
         });
     }
 }
