@@ -7,7 +7,8 @@ import {
     Alert,
     FlatList,
     ScrollView,
-    Platform
+    Platform,
+    Button
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import { SearchBar } from 'react-native-elements'
@@ -70,27 +71,37 @@ export default class ArticleListScreen extends Component {
             <ScrollView style={styles.container}>
                 <SearchBar
                     platform={"ios"}
-                    clearIcon={<Icon name='rowing' />}
+                    //clearIcon={<Icon name='rowing' />}
                     lightTheme={true}
                     onChangeText={(text) =>
                         this._onChangeText(text)
                     }
-
-                    onClear={() =>
-                        Alert.alert('Clear', 'うごかねぇ')
-                    }
+                    //onClear={ Alert.alert('Clear', 'うごかねぇ')}
+                    //onClear={this._onPressButton()}
+                    //onClear={this._onPressButton.bind(this)}
                     placeholder={'Search'} />
                 <FlatList
-
                     data={this.state.searchedData}
                     extraData={this.state}
                     removeClippedSubviews={false}
-                    renderItem={({item}) => <Text
-                        style={styles.item}
-                        onPress={() =>
-                            this.onPushPress(item.url)
-                        }
-                    >{item.title}</Text>}
+                    renderItem={({item}) =>
+                        <View
+                        style={styles.cell}>
+                            <Button
+                                onPress={ () =>
+                                    Alert.alert('You tapped the button!')
+                                }
+                                style={styles.button}
+                                title="Lea"
+                                color="#841584"
+                        />
+                            <Text
+                            style={styles.text}
+                            onPress={() =>
+                                this.onPushPress(item.url)
+                            }
+                            >{item.title}</Text>
+                        </View>}
                 />
             </ScrollView>
         );
@@ -122,11 +133,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    item: {
-        padding: 10,
-        fontSize: 18,
+    cell: {
+        flex: 1,
+        flexDirection: 'row',
         borderStyle: 'solid',
         borderWidth: 0.5,
         borderColor: '#bbb',
+    },
+    button: {
+        flex: 1,
+        backgroundColor: 'orange',
+    },
+    text: {
+        flex: 4,
+        padding: 10,
+        fontSize: 18,
     },
 });
