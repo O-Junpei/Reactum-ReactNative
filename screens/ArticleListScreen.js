@@ -9,11 +9,12 @@ import {
     ScrollView,
     Platform,
     Button,
-    Image
+    Image,
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {SearchBar} from 'react-native-elements'
 import {Icon} from 'react-native-elements'
+import Hoge from "../components/ArticleCellComponents";
 
 export default class ArticleListScreen extends Component {
 
@@ -66,44 +67,6 @@ export default class ArticleListScreen extends Component {
         }
     }
 
-    render() {
-        return (
-            <ScrollView style={styles.container}>
-                <SearchBar
-                    platform={"ios"}
-                    //clearIcon={<Icon name='rowing' />}
-                    lightTheme={true}
-                    onChangeText={(text) =>
-                        this._onChangeText(text)
-                    }
-                    //onClear={ Alert.alert('Clear', 'うごかねぇ')}
-                    //onClear={this._onPressButton()}
-                    //onClear={this._onPressButton.bind(this)}
-                    placeholder={'Search'}/>
-                <FlatList
-                    data={this.state.searchedData}
-                    extraData={this.state}
-                    removeClippedSubviews={false}
-                    renderItem={({item}) =>
-                        <View
-                            style={styles.cell}>
-                            <TouchableOpacity style={styles.button} onPress={() => {
-                                alert("you clicked me")
-                            }}>
-                                <Image source={require("../image/tab/tab-favorite.png")}/>
-                            </TouchableOpacity>
-                            <Text
-                                style={styles.text}
-                                onPress={() =>
-                                    this.onPushPress(item.url)
-                                }
-                            >{item.title}</Text>
-                        </View>}
-                />
-            </ScrollView>
-        );
-    }
-
     //TextFieldの値が変更されたら呼ばれる
     _onChangeText(text) {
         let data = this.state.data
@@ -117,12 +80,64 @@ export default class ArticleListScreen extends Component {
         this.setState({searchedData: searchedData});
     }
 
+    //セル部分が押されたら呼ばれる
     onPushPress(url) {
         this.props.navigator.push({
             title: "WebView",
             screen: "com.swiswiswift.WebView",
             passProps: {url: url},
         });
+    }
+
+    //セル部分が押されたら呼ばれる
+    testPush(hoho) {
+        console.log(hoho)
+        alert("you clicked me")
+    }
+
+    render() {
+        return (
+
+            <Hoge>
+            </Hoge>
+
+            /*
+            <ScrollView style={styles.container}>
+                <SearchBar
+                    platform={"ios"}
+                    lightTheme={true}
+                    onChangeText={(text) =>
+                        this._onChangeText(text)
+                    }
+                    placeholder={'Search'}/>
+                <FlatList
+                    data={this.state.searchedData}
+                    extraData={this.state}
+                    removeClippedSubviews={false}
+                    renderItem={({item}) =>
+                        <View
+                            style={styles.cell}>
+
+                            <TouchableOpacity onPress={(hoho) => {
+                               this.testPush(hoho)
+                            }}>
+                                <Image
+                                    style={styles.button}
+                                    source={require("../image/tab/tab-favorite.png")}/>
+                            </TouchableOpacity>
+                            <Text
+                                style={styles.text}
+                                onPress={() =>
+                                    this.onPushPress(item.url)
+                                }
+                                selectable={false}
+                            >{item.title}</Text>
+                        </View>}
+                />
+            </ScrollView>
+
+            */
+        );
     }
 }
 
@@ -138,10 +153,12 @@ const styles = StyleSheet.create({
         borderColor: '#bbb',
     },
     button: {
+        height: 32,
+        width: 32,
         marginTop: 'auto',
         marginBottom: 'auto',
         marginRight: 4,
-        marginLeft: 4,
+        marginLeft: 8,
     },
     text: {
         flex: 1,

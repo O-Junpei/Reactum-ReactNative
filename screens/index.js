@@ -6,7 +6,7 @@ import SecondTabScreen from './SecondTabScreen';
 import ThirdTabScreen from './ThirdTabScreen';
 import PushedScreen from './PushedScreen';
 import WebViewScreen from './WebViewScreen';
-
+import Hoge from '../components/ArticleCellComponents'
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
