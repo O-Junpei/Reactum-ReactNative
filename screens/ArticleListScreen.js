@@ -8,11 +8,12 @@ import {
     FlatList,
     ScrollView,
     Platform,
-    Button
+    Button,
+    Image
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
-import { SearchBar } from 'react-native-elements'
-import { Icon } from 'react-native-elements'
+import {SearchBar} from 'react-native-elements'
+import {Icon} from 'react-native-elements'
 
 export default class ArticleListScreen extends Component {
 
@@ -59,7 +60,6 @@ export default class ArticleListScreen extends Component {
             });
     }
 
-
     static onNavigatorEvent(event) {
         if (event.id === 'search') {
             //Alert.alert('NavBar', 'Search button pressed');
@@ -79,27 +79,24 @@ export default class ArticleListScreen extends Component {
                     //onClear={ Alert.alert('Clear', 'うごかねぇ')}
                     //onClear={this._onPressButton()}
                     //onClear={this._onPressButton.bind(this)}
-                    placeholder={'Search'} />
+                    placeholder={'Search'}/>
                 <FlatList
                     data={this.state.searchedData}
                     extraData={this.state}
                     removeClippedSubviews={false}
                     renderItem={({item}) =>
                         <View
-                        style={styles.cell}>
-                            <Button
-                                onPress={ () =>
-                                    Alert.alert('You tapped the button!')
-                                }
-                                style={styles.button}
-                                title="Lea"
-                                color="#841584"
-                        />
+                            style={styles.cell}>
+                            <TouchableOpacity style={styles.button} onPress={() => {
+                                alert("you clicked me")
+                            }}>
+                                <Image source={require("../image/tab/tab-favorite.png")}/>
+                            </TouchableOpacity>
                             <Text
-                            style={styles.text}
-                            onPress={() =>
-                                this.onPushPress(item.url)
-                            }
+                                style={styles.text}
+                                onPress={() =>
+                                    this.onPushPress(item.url)
+                                }
                             >{item.title}</Text>
                         </View>}
                 />
@@ -141,11 +138,13 @@ const styles = StyleSheet.create({
         borderColor: '#bbb',
     },
     button: {
-        flex: 1,
-        backgroundColor: 'orange',
+        marginTop: 'auto',
+        marginBottom: 'auto',
+        marginRight: 4,
+        marginLeft: 4,
     },
     text: {
-        flex: 4,
+        flex: 1,
         padding: 10,
         fontSize: 18,
     },
