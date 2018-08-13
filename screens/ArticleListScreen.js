@@ -120,12 +120,10 @@ export default class ArticleListScreen extends Component {
 
                                 {item.key % 2 ? <Image
                                     style={styles.button}
-                                    source={require("../image/tab/tab-favorite.png")}/> : <Image
+                                    source={require("../image/favorite/favorite-off.png")}/> : <Image
                                     style={styles.button}
-                                    source={require("../image/snorlax.png")}/>}
-
-
-
+                                    source={require("../image/favorite/favorite-on.png")}/>}
+                                    
 
                             </TouchableOpacity>
                             <Text
