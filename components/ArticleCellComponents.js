@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     Text,
     View,
@@ -12,20 +12,20 @@ import {
     Image,
 } from 'react-native';
 
-export default class Hoge extends Component{
+export default class Hoge extends Component {
     //コンストラクタ
-    constructor(props){
+    constructor(props) {
         super(props); //必ず呼ぶ
     }
 
-    render(){
-        return(
+    render() {
+        return (
 
             <View
                 style={styles.cell}>
 
                 <TouchableOpacity onPress={(hoho) => {
-                    this.testPush(hoho)
+                    //this.testPush(hoho)
                 }}>
                     <Image
                         style={styles.button}
@@ -33,11 +33,8 @@ export default class Hoge extends Component{
                 </TouchableOpacity>
                 <Text
                     style={styles.text}
-                    onPress={() =>
-                        this.onPushPress(item.url)
-                    }
                     selectable={false}
-                >{item.title}</Text>
+                >{"texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"}</Text>
             </View>
         );
     }

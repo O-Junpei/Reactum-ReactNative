@@ -90,18 +90,13 @@ export default class ArticleListScreen extends Component {
     }
 
     //セル部分が押されたら呼ばれる
-    testPush(hoho) {
-        console.log(hoho)
-        alert("you clicked me")
+    testPush(text) {
+        alert(text)
     }
 
     render() {
         return (
 
-            <Hoge>
-            </Hoge>
-
-            /*
             <ScrollView style={styles.container}>
                 <SearchBar
                     platform={"ios"}
@@ -118,12 +113,20 @@ export default class ArticleListScreen extends Component {
                         <View
                             style={styles.cell}>
 
-                            <TouchableOpacity onPress={(hoho) => {
-                               this.testPush(hoho)
+                            <TouchableOpacity onPress={() => {
+                               this.testPush(item.key)
                             }}>
-                                <Image
+
+
+                                {item.key % 2 ? <Image
                                     style={styles.button}
-                                    source={require("../image/tab/tab-favorite.png")}/>
+                                    source={require("../image/tab/tab-favorite.png")}/> : <Image
+                                    style={styles.button}
+                                    source={require("../image/snorlax.png")}/>}
+
+
+
+
                             </TouchableOpacity>
                             <Text
                                 style={styles.text}
@@ -136,7 +139,6 @@ export default class ArticleListScreen extends Component {
                 />
             </ScrollView>
 
-            */
         );
     }
 }
